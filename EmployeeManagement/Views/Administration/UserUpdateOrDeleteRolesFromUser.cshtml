@@ -1,0 +1,38 @@
+﻿@model List<UserRoleInUserViewModel>
+
+
+
+<form asp-controller="Administration" asp-action="UserUpdateOrDeleteRolesFromUser" asp-route-userId="@Context.Request.Query["userId"]" method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Add or remove users from this role</h2>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="@Model[i].roleId" />
+                    <input type="hidden" asp-for="@Model[i].roleName" />
+                    @if (Model[i].roleName == "Super Admin")
+                    {
+
+                    }
+                    else
+                    {
+                    <input asp-for="@Model[i].isSelected" class="form-check-input" />
+                    }
+                    <label class="form-check-label" asp-for="@Model[i].isSelected">
+                        @Model[i].roleName
+                    </label>
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Update" class="btn btn-warning"
+                   style="width:auto" />
+            <a asp-controller="Administration" asp-action="UserUpdate" asp-route-userId="@Context.Request.Query["userId"]"
+               class="btn btn-primary" style="width:auto">Cancel</a>
+        </div>
+    </div>
+</form>
+

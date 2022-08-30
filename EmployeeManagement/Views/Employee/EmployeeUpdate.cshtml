@@ -1,0 +1,48 @@
+﻿@model EmployeeUpdateViewModel
+
+
+<div style="display:flex; flex-direction:row; justify-content:center" class="m-5">
+    <div>
+        <form enctype="multipart/form-data" style="width:375px;" class="form-control" asp-controller="Employee" asp-action="EmployeeUpdate" method="post">
+            <div>
+                <input hidden asp-for="EmployeeId" />
+                <input hidden asp-for="employeeImageUrl" />
+            </div>
+            <div>
+                <label class="form-label" asp-for="employeeName">Name</label>
+                <input style="width:350px;" class="form-control" asp-for="employeeName" placeholder="Name" autocomplete="off" />
+            </div>
+            <br />
+            <div>
+                <label class="form-label" asp-for="employeeEmail">Email</label>
+                <input style="width: 350px;" class="form-control" asp-for="employeeEmail" placeholder="E-Mail" autocomplete="off" />
+            </div>
+            <div>
+                <label asp-for="employeeImageUrl">Photo</label>
+                <input class="form-control" accept=".jpg" type="file" name="file" />
+            </div>
+            <br />
+            <br />
+            <label class="form-label" asp-for="employeeDepartmant">Department</label>
+            <select style="width: 350px;" class="form-select" asp-for="employeeDepartmant" asp-items="Html.GetEnumSelectList<Dept>()">
+                <option selected disabled hidden>Select A Department</option>
+            </select> 
+            <br /> 
+            <div style="display:flex; justify-content:center;">
+                <button class="btn btn-primary btn-lg mt-2">Submit</button>
+            </div>
+            <div style="display:flex; justify-content:center; margin:10px;">
+                <div asp-validation-summary="All" class="text-danger"></div>
+            </div>
+        </form>
+    </div>
+    <div class="ms-1" style="border:5px solid wheat; display:flex; justify-content:center;  border-radius:10px; width:160px; height:160px;">
+        <img src="@Model.employeeImageUrl" style="width:150px; height:150px; border-radius:5px;" />
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <partial name="_Validator" />
+}

@@ -1,0 +1,56 @@
+﻿@model LoginViewModel
+
+
+
+<div style="display:flex; justify-content:center;">
+    <div class="col-6" style="width:375px">
+        <div style="display:flex; justify-content:center" class="m-5">
+            <form class="form-control" style="width:375px;" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Query["returnUrl"]" method="post">
+                <h1>Internal Logins</h1>
+                <br />
+                <label class="form-label" asp-for="email">Email</label>
+                <input style="width: 350px;" class="form-control" asp-for="email" placeholder="E-mail" autocomplete="off" />
+                <br />
+                <label class="form-label" asp-for="password">Password</label>
+                <input type="password" style="width: 350px;" class="form-control" asp-for="password" placeholder="Password" autocomplete="off" />
+                <br />
+                <label asp-for="rememberMe">Remember Me</label>
+                <input type="checkbox" asp-for="rememberMe" />
+                <br />
+                <div style="display:flex; justify-content:center;">
+                    <button class="btn btn-primary mt-2">Submit</button>
+                </div>
+                <div style="display:flex; justify-content:center;">
+                    <a asp-controller="Account" asp-action="ForgotPassword">Forgot Password?</a>
+                </div>
+                <div style="display:flex; justify-content:center; margin:10px;">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-6 m-5 form-control" style="width:375px">
+        <h1 class="text-center">External Logins</h1>
+        <br />
+            @if (Model.externalLogins.Count == 0)
+            {
+                <h3>There is no external site configured</h3>
+            }
+            else
+            {
+                <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@Context.Request.Query["returnUrl"]" method="post">
+                    <div>
+                        @foreach (var provider in Model.externalLogins)
+                        {
+                            <div style="display:flex; justify-content:center; margin:20px;">
+                                <button type="submit" class="btn btn-outline-primary" name="provider" value="@provider.Name">@provider.Name</button>
+                            </div>
+                        }
+                    </div>
+                </form>
+            }
+    </div>
+</div>
+@section Scripts{
+    <partial name="_Validator" />
+}

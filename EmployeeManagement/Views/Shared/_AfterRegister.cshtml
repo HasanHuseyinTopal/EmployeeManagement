@@ -1,0 +1,15 @@
+﻿
+@if (ViewBag.Congrats != null)
+{
+    <div style="display:flex; justify-content:center; flex-direction:column; align-items:center; width:100%; height:50vh;">
+        <h3>@ViewBag.Congrats <span class="text-danger">Confirmed</span></h3>
+        <a class="btn btn-outline-warning" asp-controller="Employee" asp-action="EmployeeList">Welcome</a>
+    </div>
+}
+else
+{
+    <div style="display:flex; justify-content:center; flex-direction:column; align-items:center; width:100%; height:50vh;">
+        <h3>Your Registration is <span class="text-danger">Completed</span></h3>
+        <h3>For Login to Your Account You <span class="text-danger">Have</span> to Confirm Your Email</h3>
+    </div>
+}

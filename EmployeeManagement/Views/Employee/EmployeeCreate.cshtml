@@ -1,0 +1,57 @@
+﻿@model EmployeeCreateViewModel
+
+
+<div style="display:flex; justify-content:center" class="m-5">
+    <form enctype="multipart/form-data" style="width:375px;" class="form-control" asp-controller="Employee" asp-action="EmployeeCreate" method="post">
+        <div>
+            <label class="form-label" asp-for="employeeName">Name</label>
+            <input style="width:350px;" class="form-control" asp-for="employeeName" placeholder="Name" autocomplete="off" />
+        </div>
+        <br />
+        <div>
+            <label class="form-label" asp-for="employeeEmail">Email</label>
+            <input style="width: 350px;" class="form-control" asp-for="employeeEmail" placeholder="E-Mail" autocomplete="off" />
+        </div>
+        <br />
+        <div>
+            <label class="form-label" asp-for="employeeEmailConfirmation">Confirm Email</label>
+            <input style="width: 350px;" class="form-control" asp-for="employeeEmailConfirmation" placeholder="Confirmation" autocomplete="off" />
+        </div>
+        <br />
+        <div>
+            <label asp-for="employeeImageUrl">Photo</label>
+            <input type="file" accept=".jpg" class="form-control" name="file" id="uploadImageId" />
+        </div>
+        <br />
+        <label class="form-label" asp-for="employeeDepartmant">Department</label>
+        <select style="width: 350px;" class="form-select" asp-for="employeeDepartmant" asp-items="Html.GetEnumSelectList<Dept>()">
+            <option selected disabled hidden>Select A Department</option>
+        </select>
+        <br />
+        <div style="display:flex; justify-content:center;">
+            <button onclick="return İsConfirmed()" class="btn btn-primary mt-2">Submit</button>
+        </div>
+        <div style="display:flex; justify-content:center; margin:10px;">
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts{
+    <partial name="_Validator" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script> 
+        function İsConfirmed() {
+            if ($("#uploadImageId").val() == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Select An Image',
+                })
+                return false;
+            }
+            else { return true; }
+        }
+    </script>
+}

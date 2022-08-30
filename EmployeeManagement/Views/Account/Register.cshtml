@@ -1,0 +1,29 @@
+﻿@model RegisterWievModel
+
+
+
+<div style="display:flex; justify-content:center" class="m-5">
+    <form class="form-control" style="width:375px;" asp-controller="Account" asp-action="Register" method="post">
+        <label class="form-label" asp-for="email">Email</label>
+        <input style="width: 350px;" class="form-control" asp-for="email" placeholder="E-mail" autocomplete="off" />
+        <br />
+        <label class="form-label" asp-for="password">Password</label>
+        <input type="password" style="width: 350px;" class="form-control" asp-for="password" placeholder="Password" autocomplete="off" />
+        <br />
+        <label class="form-label" asp-for="confirmPassword">Confirm-Password</label>
+        <input type="password" style="width: 350px;" class="form-control" asp-for="confirmPassword" placeholder="Confirm-Password" autocomplete="off" />
+        <br />
+        <label class="form-label" asp-for="city"></label>
+        <input  style="width: 350px;" class="form-control" asp-for="city" placeholder="City" autocomplete="off" />
+        <br />
+        <div style="display:flex; justify-content:center;">
+            <button class="btn btn-primary mt-2">Submit</button>
+        </div>
+        <div style="display:flex; justify-content:center; margin:10px;">
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_Validator" />
+}

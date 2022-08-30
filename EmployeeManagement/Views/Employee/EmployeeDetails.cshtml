@@ -1,0 +1,26 @@
+﻿@model Employee
+
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.employeeName</h1>
+            </div>
+
+            <div class="card-body text-center">
+                <img class="card-img-top" style="width:250px; height:250px" asp-append-version="true" src="@Model.employeeImageUrl" />
+
+                <h4>Employee ID : @Model.employeeId</h4>
+                <h4>Email : @Model.employeeEmail</h4>
+                <h4>Department : @Model.employeeDepartmant</h4>
+
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="Employee" asp-action="EmployeeList" class="btn btn-primary">Back</a>
+                <a asp-controller="Employee" asp-action="EmployeeUpdate" asp-route-id="@Model.employeeId" class="btn btn-warning">Edit</a>
+                <a asp-controller="Employee" asp-action="EmployeeDelete" asp-route-id="@Model.employeeId" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>

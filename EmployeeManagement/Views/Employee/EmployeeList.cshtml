@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Employee>
+
+
+<div style="display:flex; flex-direction:row; justify-content:center; max-width:100%; flex-wrap:wrap;" class="card-deck">
+    @foreach (var employee in Model)
+    {
+        <div class="card m-5" style="width: 18rem;">
+            <div class="card-header">
+                <h3>@employee.employeeName</h3>
+            </div>
+            <img class="card-img m-auto" asp-append-version="true" style="width:250px; height:250px" src="@employee.employeeImageUrl"  />
+            <div class="card-footer text-center">
+                <a class="btn btn-primary" asp-controller="Employee" asp-action="EmployeeDetails" asp-route-id="@employee.employeeId">Details</a>
+                <a class="btn btn-warning" asp-controller="Employee" asp-action="EmployeeUpdate" asp-route-id="@employee.employeeId">Edit</a>
+                <a class="btn btn-danger" asp-controller="Employee" asp-action="EmployeeDelete" asp-route-id="@employee.employeeId">Delete</a>
+            </div>
+        </div>
+    }
+</div>

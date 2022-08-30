@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ApplicationUser>
+
+
+@if (Model.Any())
+{
+
+    @if ((await _authService.AuthorizeAsync(User, "CreateRolePolicy")).Succeeded)
+    {
+        <div style="display:flex; margin:50px 0 0 0; justify-content:center;">
+            <a asp-controller="Account" asp-action="Register" class="btn btn-primary">Create A User</a>
+        </div>
+    }
+    <h1>All Users</h1>
+    foreach (var user in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Role Id : @user.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@user.UserName</h5>
+            </div>
+            <div class="card-footer">
+                @if ((await _authService.AuthorizeAsync(User, "EditRolePolicy")).Succeeded)
+                {
+                    <a asp-controller="Administration" asp-action="UserUpdate" asp-route-userId="@user.Id" class="btn btn-warning">Edit</a>
+                }
+                @if ((await _authService.AuthorizeAsync(User, "DeleteRolePolicy")).Succeeded)
+                {
+                    <a asp-controller="Administration" asp-action="UserDelete" asp-route-userId="@user.Id" class="btn btn-danger">Delete</a>
+                }
+            </div>
+        </div>
+    }
+}
+else
+{
+    {
+        <div style="display:flex;  justify-content:center; max-width:100%; flex-wrap:wrap;" class="card-deck">
+
+            <div class="card m-5" style="width:26rem;">
+                <div class="card-header">
+                    <h5 style="text-align:center;">Use the button below to create a user</h5>
+                </div>
+                <div class="card-footer text-center">
+                    <a class="btn btn-primary" style="width:auto"
+                       asp-controller="administration" asp-action="UserCreate">
+                        Create User
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+}
+

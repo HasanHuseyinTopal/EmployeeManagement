@@ -1,0 +1,18 @@
+﻿@model RoleCreateViewModel
+
+<div style="display:flex; justify-content:center" class="m-5">
+    <form class="form-control" style="width:375px;" asp-controller="Administration" asp-action="RoleCreate" method="post">
+        <label class="form-label" asp-for="roleName"></label>
+        <input class="form-control" asp-for="roleName" placeholder="Role Name" autocomplete="off" />
+        <br />
+        <div style="display:flex; justify-content:center;">
+            <button class="btn btn-primary mt-2">Submit</button>
+        </div>
+        <div style="display:flex; justify-content:center; margin:10px;">
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </form>
+</div>
+@section Scripts{ 
+    <partial name="_Validator"/>
+}
